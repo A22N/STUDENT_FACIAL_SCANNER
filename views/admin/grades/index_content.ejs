@@ -1,0 +1,55 @@
+<div class="page-header">
+  <h3 class="page-title">Quản lý khối</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <a href="/admin/grades/add" class="btn btn-primary mb-3">
+      + Thêm khối
+    </a>
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Tên khối</th>
+          <th style="width:150px;">Hành động</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% grades.forEach(g => { %>
+        <tr>
+          <td><%= g.grade_name %></td>
+
+          <td>
+            <a href="/admin/grades/edit/<%= g.id %>" class="btn btn-success btn-sm">Sửa</a>
+
+            <button class="btn btn-danger btn-sm"
+                onclick="deleteGrade(<%= g.id %>)">
+                Xóa
+            </button>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+<script>
+async function deleteGrade(id) {
+  if (!confirm("Bạn có chắc muốn xóa khối này?")) return;
+
+  const res = await fetch(`/api/grades/${id}`, { method: "DELETE" });
+  const json = await res.json();
+
+  if (json.success) {
+    alert("Đã xóa thành công!");
+    location.reload();
+  } else {
+    alert(json.message);
+  }
+}
+</script>

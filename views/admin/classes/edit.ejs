@@ -1,0 +1,59 @@
+<%- include('../layout/master', { page: 'admin/classes/edit', active: 'classes' }) %>
+
+<div class="page-header">
+  <h3 class="page-title">Sửa lớp học</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form id="formEditClass">
+
+      <div class="mb-3">
+        <label class="form-label">Tên lớp</label>
+        <input name="class_name" class="form-control" value="<%= classItem.class_name %>" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Khối</label>
+        <select name="grade_id" class="form-select">
+          <% grades.forEach(g => { %>
+          <option value="<%= g.id %>" <%= g.id === classItem.grade_id ? "selected":"" %>>
+            <%= g.grade_name %>
+          </option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Mô tả</label>
+        <input name="description" class="form-control" value="<%= classItem.description %>" />
+      </div>
+
+      <button class="btn btn-primary">Lưu thay đổi</button>
+      <a href="/admin/classes" class="btn btn-secondary">Hủy</a>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+document.getElementById("formEditClass").onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+
+  const res = await fetch(`/api/classes/<%= classItem.id %>`, {
+    method: "PUT",
+    headers: {"Content-Type":"application/json"},
+    body: JSON.stringify(data)
+  });
+
+  const json = await res.json();
+
+  if (json.success) {
+    alert("Sửa lớp thành công!");
+    window.location.href="/admin/classes";
+  } else alert(json.message);
+};
+</script>

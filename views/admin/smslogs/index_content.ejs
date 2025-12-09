@@ -1,0 +1,38 @@
+<div class="container mt-4">
+    <h3>Lịch sử gửi tin nhắn</h3>
+
+    <div class="card mt-3">
+        <div class="card-body">
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Học sinh</th>
+                        <th>SĐT phụ huynh</th>
+                        <th>Nội dung</th>
+                        <th>Trạng thái</th>
+                        <th>Thời gian</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% logs.forEach(item => { %>
+                        <tr>
+                            <td><%= item.full_name %> (<%= item.student_id %>)</td>
+                            <td><%= item.phone %></td>
+                            <td><%= item.message %></td>
+                            <td>
+                                <% if (item.code === "100") { %>
+                                    <span class="badge bg-success">Thành công</span>
+                                <% } else { %>
+                                    <span class="badge bg-danger"><%= item.error || "Thất bại" %></span>
+                                <% } %>
+                            </td>
+                            <td><%= new Date(item.created_at).toLocaleString() %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>

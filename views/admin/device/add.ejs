@@ -1,0 +1,58 @@
+<%- include('../layout/master', { page: 'admin/device/add', active: 'device' }) %>
+
+<div class="page-header">
+  <h3 class="page-title">Thêm thiết bị quét mặt</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form id="formAddDevice">
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Tên thiết bị</label>
+          <input name="name" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Địa chỉ IP</label>
+          <input name="ip" class="form-control" required />
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Mô tả</label>
+          <textarea name="description" class="form-control"></textarea>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary">Lưu thiết bị</button>
+      <a href="/admin/device" class="btn btn-secondary">Hủy</a>
+
+    </form>
+    
+  </div>
+</div>
+
+<script>
+document.getElementById("formAddDevice").onsubmit = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    const res = await fetch("/api/device", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+
+    if (json.success) {
+        alert("Thêm thiết bị thành công!");
+        window.location.href = "/admin/device";
+    } else alert(json.message);
+};
+</script>

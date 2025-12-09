@@ -1,0 +1,49 @@
+<%- include('../layout/master', { page: 'admin/students/edit', active: 'students' }) %>
+<div class="page-header">
+  <h3 class="page-title">Sửa thông tin học sinh</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form method="POST" action="/admin/students/edit/<%= student.id %>">
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Mã học sinh</label>
+          <input name="student_id" class="form-control" value="<%= student.student_id %>" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Họ và tên</label>
+          <input name="full_name" class="form-control" value="<%= student.full_name %>" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Lớp</label>
+          <select name="class_id" class="form-select">
+            <% classes.forEach(c => { %>
+            <option value="<%= c.id %>" <%= c.id === student.class_id ? "selected" : "" %>><%= c.class_name %></option>
+            <% }) %>
+          </select>
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">SĐT phụ huynh</label>
+          <input name="parent_phone" class="form-control" value="<%= student.parent_phone %>" />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Zalo ID</label>
+          <input name="zalo_id" class="form-control" value="<%= student.zalo_id %>" />
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary">Lưu</button>
+      <a href="/admin/students" class="btn btn-secondary">Hủy</a>
+    </form>
+
+  </div>
+</div>

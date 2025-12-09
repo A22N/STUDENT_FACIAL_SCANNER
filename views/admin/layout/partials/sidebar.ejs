@@ -1,0 +1,81 @@
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-inner slimscroll">
+
+    <div class="sidebar-contents">
+
+      <div id="sidebar-menu" class="sidebar-menu">
+
+        <div class="d-flex align-items-center bg-theme text-center">
+          <span class="lni lni-cross text-white" id="mobile_btn_close"></span>
+          <a href="javascript:void(0)" class="d-block menu-style text-white">
+            <div class="user-avatar d-inline-block mr-3">
+            </div>
+          </a>
+        </div>
+
+        <div class="sidebar-input">
+          <div class="top-nav-search">
+            <form>
+              <input type="text" class="form-control" placeholder="Search here">
+              <button class="btn" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+          </div>
+        </div>
+
+        <ul>
+          <li class="<%= active === 'dashboard' ? 'active' : '' %>">
+            <a href="/admin">
+              <img src="/admin/assets/img/home.svg" class="sidebar_img">
+              <span>Dashboard</span>
+            </a>
+          </li>
+
+          <li class="<%= active === 'students' ? 'active' : '' %>">
+            <a href="/admin/students">
+              <img src="/admin/assets/img/employee.svg" class="sidebar_img">
+              <span>Students</span>
+            </a>
+          </li>
+
+          <li class="<%= active === 'classes' ? 'active' : '' %>">
+            <a href="/admin/classes">
+              <img src="/admin/assets/img/company.svg" class="sidebar_img">
+              <span>Classes</span>
+            </a>
+          </li>
+
+          <li class="<%= active === 'attendance' ? 'active' : '' %>">
+            <a href="/admin/attendance">
+              <img src="/admin/assets/img/calendar.svg" class="sidebar_img">
+              <span>Attendance</span>
+            </a>
+          </li>
+          <li class="<%= active === 'smslogs' ? 'active' : '' %>">
+            <a href="/admin/smslogs">
+              <img src="/admin/assets/img/log.svg" class="sidebar_img">
+              <span>Smslogs</span>
+            </a>
+          </li>
+
+          <li class="<%= active === 'devices' ? 'active' : '' %>">
+            <a href="/admin/devices">
+              <img src="/admin/assets/img/report.svg" class="sidebar_img">
+              <span>Devices</span>
+            </a>
+          </li>
+
+          <li class="<%= active === 'grades' ? 'active' : '' %>">
+            <a href="/admin/grades">
+              <img src="/admin/assets/img/manage.svg" class="sidebar_img">
+              <span>Grades</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

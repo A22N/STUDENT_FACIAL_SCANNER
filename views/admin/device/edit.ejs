@@ -1,0 +1,58 @@
+<%- include('../layout/master', { page: 'admin/device/edit', active: 'device' }) %>
+
+<div class="page-header">
+  <h3 class="page-title">Sửa thiết bị</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form id="formEditDevice">
+
+      <div class="row">
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Tên thiết bị</label>
+          <input name="name" class="form-control" value="<%= device.name %>" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+          <label class="form-label">Địa chỉ IP</label>
+          <input name="ip" class="form-control" value="<%= device.ip %>" required />
+        </div>
+
+        <div class="col-md-12 mb-3">
+          <label class="form-label">Mô tả</label>
+          <textarea name="description" class="form-control"><%= device.description %></textarea>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary">Lưu thay đổi</button>
+      <a href="/admin/device" class="btn btn-secondary">Hủy</a>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+document.getElementById("formEditDevice").onsubmit = async (e) => {
+    e.preventDefault();
+
+    const data = Object.fromEntries(new FormData(e.target));
+
+    const res = await fetch(`/api/device/<%= device.id %>`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const json = await res.json();
+
+    if (json.success) {
+        alert("Cập nhật thành công!");
+        window.location.href = "/admin/device";
+    } else alert(json.message);
+};
+</script>

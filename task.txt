@@ -1,0 +1,33 @@
+Test API attendance trực tiếp (không qua máy quét)
+Dùng Postman:
+
+POST http://localhost:3000/api/attendance/face-scan
+
+Đặt Sandbox: "0" trong sms.service.js
+
+Gắn đúng URL này vào config của máy quét:
+http://<IP_server>:3000/api/PushAddr/CarriedDevice
+
+============================================================
+
+3. Sau này dùng brandname CSKH “thật” cho nội dung HS
+
+Khi công ty cho phép đăng ký brandname riêng:
+
+Bạn đổi .env:
+
+ESMS_BRANDNAME=TEN_BRAND_CUA_TRUONG
+ESMS_SANDBOX=0
+
+
+Thay duy nhất dòng msg = ...:
+
+msg = `HS ${student.full_name} (${student.class_name}) da diem danh luc ${
+  timestamp || new Date().toISOString()
+}`;
+
+
+Các phần còn lại (sms.service.js, SmsLog…) không cần đổi.
+
+Backend là Express
+frontend là reatjs

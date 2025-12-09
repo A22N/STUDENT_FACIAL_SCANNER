@@ -1,0 +1,53 @@
+<!-- <%- include('../layout/master', { page: 'admin/attendance/add', active: 'attendance' }) %>
+
+<div class="page-header">
+  <h3 class="page-title">Điểm danh thủ công</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form id="formAddAttendance">
+
+      <div class="mb-3">
+        <label class="form-label">Học sinh</label>
+        <select name="student_id" class="form-select" required>
+          <% students.forEach(s => { %>
+            <option value="<%= s.id %>"><%= s.full_name %> - <%= s.student_id %></option>
+          <% }) %>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Thời gian</label>
+        <input type="datetime-local" name="timestamp" class="form-control" value="<%= default_time %>" required />
+      </div>
+
+      <button class="btn btn-primary">Thêm điểm danh</button>
+      <a href="/admin/attendance" class="btn btn-secondary">Hủy</a>
+
+    </form>
+
+  </div>
+</div>
+
+<script>
+document.getElementById("formAddAttendance").onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  data.source = "manual";
+
+  const res = await fetch("/api/attendance", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+  });
+
+  const json = await res.json();
+
+  if (json.success) {
+      alert("Điểm danh thành công!");
+      window.location.href = "/admin/attendance";
+  } else alert(json.message);
+};
+</script> -->

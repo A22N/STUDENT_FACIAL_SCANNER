@@ -1,0 +1,41 @@
+<%- include('../layout/master', { page: 'admin/grades/edit', active: 'grades' }) %>
+
+<div class="page-header">
+  <h3 class="page-title">Sửa khối học</h3>
+</div>
+
+<div class="card">
+  <div class="card-body">
+
+    <form id="formEditGrade">
+
+      <div class="mb-3">
+        <label class="form-label">Tên khối</label>
+        <input name="grade_name" class="form-control" value="<%= grade.grade_name %>" required />
+      </div>
+
+      <button class="btn btn-primary">Lưu thay đổi</button>
+      <a href="/admin/grades" class="btn btn-secondary">Hủy</a>
+
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById("formEditGrade").onsubmit = async (e) => {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+
+  const res = await fetch(`/api/grades/<%= grade.id %>`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+  });
+
+  const json = await res.json();
+  if (json.success) {
+      alert("Sửa khối thành công!");
+      window.location.href = "/admin/grades";
+  } else alert(json.message);
+};
+</script>
