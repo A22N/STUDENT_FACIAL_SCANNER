@@ -31,3 +31,7 @@ Các phần còn lại (sms.service.js, SmsLog…) không cần đổi.
 
 Backend là Express
 frontend là reatjs
+
+git add .
+git commit -m "message"
+git push
