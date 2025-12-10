@@ -70,8 +70,11 @@ exports.handleCarriedDevice = async (req, res) => {
         let smsRes = null;
 
         if (student.parent_phone) {
-            const msg = `Học sinh ${student.full_name} đã điểm danh lúc ${new Date().toLocaleTimeString()}`;
 
+            // ====== ĐOẠN VÁ TẠM DÙNG TEMPLATE ====== //
+            const msg = `Học sinh ${student.full_name} đã điểm danh lúc ${new Date().toLocaleTimeString()}`;
+            // const msg = `Cam on quy khach da su dung dich vu cua chung toi. Chuc quy khach mot ngay tot lanh!`;
+            
             console.log("📤 Gửi SMS:", msg);
 
             smsRes = await sendSMS(student.parent_phone, msg);
